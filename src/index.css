@@ -13,6 +13,9 @@ button {
 .full-width {
   width: 100%;
 }
+#root {
+  height: 100%;
+}
 .container {
   display: grid;
 
@@ -29,7 +32,7 @@ button {
   background-color: #08417a;
   color: #ffffff;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 
   justify-content: space-between;
   align-items: center;
@@ -115,12 +118,13 @@ button {
 }
 
 /* [DOES NOT MATTER] */
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
   font-family: arial, sans-serif;
-}
+} */
+
 /* Sidebar 
 .brand button {
   font-size: 3rem;
@@ -162,7 +166,7 @@ body {
 }
 .footer {
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   grid-area: footer;
   background-color: #08417a;
   color: #ffffff;
@@ -202,7 +206,10 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  background-color: rgb(195, 245, 247);
+  border-radius: 17px 17px 17px 17px;
+  -moz-border-radius: 17px 17px 17px 17px;
+  -webkit-border-radius: 17px 17px 17px 17px;
+  border: 1px solid #2a2485;
 }
 .customer a {
   text-decoration: none;

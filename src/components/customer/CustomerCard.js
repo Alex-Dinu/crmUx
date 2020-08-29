@@ -17,11 +17,7 @@ function CustomerCard(props) {
           alt={props.customer.emailAddress}
         />
         <div className="customer-name">
-          {props.customer.id +
-            ":" +
-            props.customer.firstName +
-            " " +
-            props.customer.lastName}
+          {props.customer.firstName + " " + props.customer.lastName}
         </div>
         <a
           className="customer-email"
