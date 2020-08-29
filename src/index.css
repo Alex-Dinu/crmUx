@@ -80,7 +80,6 @@ button {
   color: white;
   text-decoration: none;
   text-align: center;
-
 }
 #hamitems a:hover {
   background: #9dd1f3;
@@ -122,7 +121,7 @@ body {
   margin: 0;
   font-family: arial, sans-serif;
 }
-/* Sidebar  */
+/* Sidebar 
 .brand button {
   font-size: 3rem;
   padding: 0.5rem;
@@ -147,7 +146,7 @@ body {
   background-color: #08417a;
   color: #ffffff;
   border-radius: 100%;
-  /* border: 0.1rem #000000 solid; */
+
   width: 3rem;
   height: 3rem;
   padding: 0.5rem;
@@ -157,7 +156,7 @@ body {
   position: absolute;
   right: 0.5rem;
   top: 1.5rem;
-}
+} */
 .content-margined {
   margin: 1rem;
 }
@@ -171,3 +170,58 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/*  customers - start */
+.customers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customers li {
+  list-style-type: none;
+  padding: 0;
+  flex: 0 1 20rem;
+  margin: 1rem;
+  height: 12rem;
+  border-bottom: 0.1rem #c0c0c0 solid;
+}
+
+.customer-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*  customers - end */
+
+/*  customer card - start */
+.customer {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  background-color: rgb(195, 245, 247);
+}
+.customer a {
+  text-decoration: none;
+}
+.customer-name {
+  /* border: 1px solid black; */
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2a2485;
+}
+
+.customer-email {
+  /* border: 1px solid black; */
+  color: #2a2485;
+}
+.customer-image {
+  /* border: 1px solid black; */
+  max-width: 5rem;
+  max-height: 5rem;
+}
+
+/*  customer card - end */
