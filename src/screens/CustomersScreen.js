@@ -35,7 +35,7 @@ function CustomersScreen(props) {
       {loading && <SkeletonCustomers />}
       {!loading && (
         <div>
-          <div className="search">
+          <div className="customerSearch">
             <TextField
               className="customers-search"
               id="standard-basic"

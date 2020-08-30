@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 function CustomerCard(props) {
   return (
-    <div className="customer">
-      <Link
-        to={{
-          pathname: "/CustomerScreen",
-          search: "?customerId=" + props.customer.id,
-        }}
-      >
+    <Link
+      to={{
+        pathname: "/CustomerScreen",
+        search: "?customerId=" + props.customer.id,
+      }}
+    >
+      <div className="customer">
         <img
           className="customer-image"
           src={props.imagePath}
@@ -25,8 +25,8 @@ function CustomerCard(props) {
         >
           {props.customer.emailAddress}
         </a>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 
