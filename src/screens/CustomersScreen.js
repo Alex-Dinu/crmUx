@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Customer from "../components/customer/Customers";
+
 import data from "./__mocks__/customerService";
 import CustomerCard from "../components/customer/CustomerCard";
 import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
+import { AVATAR_IMAGE_PATH } from "../utils/constants";
 
 function CustomersScreen(props) {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const imagePath = "../images/avatars";
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
@@ -47,7 +47,7 @@ function CustomersScreen(props) {
               <li key={customer.id}>
                 <CustomerCard
                   customer={customer}
-                  imagePath={imagePath + "/" + getRandomInt(6) + ".png"}
+                  imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
                 ></CustomerCard>
               </li>
             ))}

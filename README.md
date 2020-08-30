@@ -4,7 +4,7 @@ Ctrl + Shift + v
 
 Here are some of the features we implemented:
 
-## User Interface features
+### User Interface features
 
 - flex grid
 - Responsive css
@@ -14,25 +14,27 @@ Here are some of the features we implemented:
 - react-loading-skeleton
   - Display skeleton screen while data is fetched.
 
-## Code
+### Code
 
 - PropTypes
   - Types validations
   - Object Shapes
+- Hooks
+  - React, React-Router-DOM and Redux
 
-## Functionality
+### Functionality
 
 - Customer Search
 
 # Un-implemented features
 
-## User Interface
+### User Interface
 
 - Security
   - Authorization-driven menues
   - Log-in\log-out screens
 
-## Code
+### Code
 
 - Security
   - @EnableWebSecurity
@@ -40,3 +42,7 @@ Here are some of the features we implemented:
   - Authorization in filters using jwt
   - Enable Https\SSH using spring-boot-starter-security
   - Enable CORS \*\*\*
+
+# Areas of improvement
+### State management
+- Reloading components when not needed.

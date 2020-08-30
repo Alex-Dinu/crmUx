@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import data from "../screens/__mocks__/customerService";
 import inter from "../screens/__mocks__/InteractionService";
 import CustomerCard from "../components/customer/CustomerCard";
@@ -10,10 +10,11 @@ import { AVATAR_IMAGE_PATH } from ".././utils/constants";
 function CustomerScreen(props) {
   const [customer, setCustomer] = useState({});
   const [interactions, setInteractions] = useState([]);
+  const history = useHistory();
 
   // Get the customerId from the query string parameter.
   const customerId = new URLSearchParams(props.location.search).get(
-    "customerId"
+    "customerid"
   );
 
   // This is just a random integer generator function used
@@ -23,10 +24,11 @@ function CustomerScreen(props) {
   }
 
   useEffect(() => {
-    data.getCustomer().then((res) => {
-      setCustomer(res.customer);
-    });
-
+    if (customer.id == undefined) {
+      data.getCustomer().then((res) => {
+        setCustomer(res.customer);
+      });
+    }
     inter.get().then((res) => {
       setInteractions(res.interactions);
     });
@@ -38,7 +40,13 @@ function CustomerScreen(props) {
   };
 
   const addInteractionHandler = () => {
-    console.log(">>> CustomerScreen.addInteractionHandler");
+    console.log(
+      ">>> CustomerScreen.addInteractionHandler customerId=" + customerId
+    );
+    history.push({
+      pathname: "/interaction",
+      search: "?customerid=" + customerId,
+    });
   };
 
   const deleteInteractionHandler = (interactionId) => {

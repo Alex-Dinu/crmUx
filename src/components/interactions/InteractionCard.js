@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+//http://nicolasgallagher.com/pure-css-speech-bubbles/demo/
 function InteractionCard(props) {
   return (
     <>
-      <blockquote class="example-twitter">
+      <blockquote className="example-twitter">
         <div>Interaction date: {props.interaction.date}</div>
         <p>{props.interaction.comments}</p>
         <div>
@@ -40,11 +40,7 @@ function InteractionCard(props) {
 }
 
 InteractionCard.propTypes = {
-  interaction: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.string,
-    comments: PropTypes.string,
-  }),
+  // TODO: interaction shape.
   deleteInteractionHandler: PropTypes.func,
 };
 
