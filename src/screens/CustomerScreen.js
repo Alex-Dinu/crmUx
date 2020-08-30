@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+
 import data from "../screens/__mocks__/customerService";
 import inter from "../screens/__mocks__/InteractionService";
-import InteractionListItem from "../components/interactions/InteractionListItem";
 import CustomerCard from "../components/customer/CustomerCard";
 
+import InteractionCard from "../components/interactions/InteractionCard";
+import { AVATAR_IMAGE_PATH } from ".././utils/constants";
+
 function CustomerScreen(props) {
+  const [customer, setCustomer] = useState({});
+  const [interactions, setInteractions] = useState([]);
+
+  // Get the customerId from the query string parameter.
   const customerId = new URLSearchParams(props.location.search).get(
     "customerId"
   );
-  const [customer, setCustomer] = useState({});
-  const [interactions, setInteractions] = useState([]);
-  const imagePath = "../images/avatars";
+
+  // This is just a random integer generator function used
+  // to pick a random avatar for the demo.
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+
   useEffect(() => {
     data.getCustomer().then((res) => {
       setCustomer(res.customer);
@@ -27,36 +34,56 @@ function CustomerScreen(props) {
   }, []);
 
   const deleteCustomerHandler = (customerId) => {
-    console.log(">>> Deleting customer");
+    console.log(">>> CustomerScreen.Deleting customer");
   };
 
-  const updateCustomerHandler = (customer) => {
-    console.log(">>> Updating customer");
+  const addInteractionHandler = () => {
+    console.log(">>> CustomerScreen.addInteractionHandler");
   };
 
+  const deleteInteractionHandler = (interactionId) => {
+    console.log(
+      ">>> CustomerScreen.deleteInteractionHandler interactionId = " +
+        interactionId
+    );
+  };
   return (
     <div>
       <CustomerCard
         customer={customer}
-        imagePath={imagePath + "/" + getRandomInt(6) + ".png"}
+        imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
       ></CustomerCard>
+      <button
+        className="button"
+        name="button"
+        onClick={() => {
+          deleteCustomerHandler();
+        }}
+      >
+        Delete Customer
+      </button>
 
-      <ul className="customers">
+      <button
+        className="button"
+        name="button"
+        onClick={() => {
+          addInteractionHandler();
+        }}
+      >
+        Add Interaction
+      </button>
+      <ul className="interactions">
         {interactions.map((interaction) => (
           <li key={interaction.id}>
-            <InteractionListItem
+            <InteractionCard
               interaction={interaction}
-            ></InteractionListItem>
+              deleteInteractionHandler={deleteInteractionHandler}
+            ></InteractionCard>
           </li>
         ))}
       </ul>
-      <div>
-        <InteractionListItem></InteractionListItem>
-      </div>
     </div>
   );
 }
-
-CustomerScreen.propTypes = {};
 
 export default CustomerScreen;

@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import HomeScreen from "./screens/HomeScreen";
 import SignOut from "./screens/SignOut";
 import SignIn from "./screens/SignIn";
 import CustomersScreen from "./screens/CustomersScreen";
 import CustomerScreen from "./screens/CustomerScreen";
+import HelpScreen from "./screens/HelpScreen";
 
 function App() {
   // const openMenu = () => {
@@ -24,9 +25,9 @@ function App() {
 
           <div id="hamitems">
             <a href="/">Home</a>
-            <a href="/signin">Sign In</a>
-            <a href="/signout">Sign Out</a>
             <a href="/CustomersScreen">Customers</a>
+            <a href="/signin">Sign In</a>
+            <a href="/HelpScreen">Help</a>
           </div>
         </nav>
       </div>
@@ -35,6 +36,7 @@ function App() {
         {/* <div className="content"> */}
         <Route path="/CustomerScreen" component={CustomerScreen} />
         <Route path="/CustomersScreen" component={CustomersScreen} />
+        <Route path="/HelpScreen" component={HelpScreen} />
         <Route path="/signout" component={SignOut} />
         <Route path="/signin" component={SignIn} />
         <Route path="/" exact={true} component={HomeScreen} />

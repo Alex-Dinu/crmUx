@@ -1,7 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-function Home(props) {
-  return <div>Home Component</div>;
+
+function Home() {
+  return (
+    <div className="homeMessage">
+      <h1>Welcome to the only CRM application you would ever need.</h1>
+    </div>
+  );
 }
-Home.propTypes = {};
+
 export default Home;
