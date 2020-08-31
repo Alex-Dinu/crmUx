@@ -10,6 +10,7 @@ import HelpScreen from "./screens/HelpScreen";
 import InteractionMaintenanceContainer from "./components/interactions/InteractionMaintenanceContainer";
 
 function App() {
+  //TODO: Jest
   // const openMenu = () => {
   //   document.querySelector(".sidebar").classList.add("open");
   // };
