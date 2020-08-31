@@ -27,9 +27,7 @@ export async function getCustomers() {
 
   try {
     const { data } = await Axios.post(CUSTOMERS_URI, {});
-    //console.log(">>>CartScreen.getNewCartId cartid=" + data.id);
     return data.id;
   } catch (error) {
-    //.log(">>>CartScreen.updateCartDataStore error=" + error.message);
   }
 }

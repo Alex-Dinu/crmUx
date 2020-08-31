@@ -5,35 +5,42 @@ import CustomerCard from "../components/customer/CustomerCard";
 import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
 import { AVATAR_IMAGE_PATH } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { getCustomers } from "../services/customerService";
 
-function CustomersScreen(props) {
-  const [customers, setCustomers] = useState([]);
+function CustomersScreen() {
+  const state = useSelector((state) => state);
+  const customers = state.customers;
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
   useEffect(() => {
-    setLoading(true);
-    const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
+    console.log(">>>customers=" + customers);
+    dispatch(getCustomers());
+    
+    // setLoading(true);
+    // const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
 
-    data
-      .get()
+    // data
+    //   .get()
 
-      .then((res) => {
-        setCustomers(res.customers);
-      })
-      .then(() => delay(3000))
-      .then(() => setLoading(false));
+    //   .then((res) => {
+    //     setCustomers(res.customers);
+    //   })
+    //   .then(() => delay(3000))
+    //   .then(() => setLoading(false));
 
     return () => {};
   }, []);
 
   return (
     <>
-      {loading && <SkeletonCustomers />}
-      {!loading && (
+      {state.loading && <SkeletonCustomers />}
+      {!state.loading && (
         <div>
           <div className="customerSearch">
             <TextField
