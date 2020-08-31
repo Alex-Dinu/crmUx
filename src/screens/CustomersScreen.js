@@ -6,23 +6,21 @@ import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
 import { AVATAR_IMAGE_PATH } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { getCustomers } from "../redux/actions/customerAction";
-
+import { customerList } from "../redux/actions/customerAction";
 
 function CustomersScreen() {
   const state = useSelector((state) => state);
-  const customers = state.customers;
-  const [loading, setLoading] = useState(false);
+  const { customers, loading, error } = state.customerList;
+  // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
+  // function getRandomInt(max) {
+  //   return Math.floor(Math.random() * Math.floor(max));
+  // }
 
   useEffect(() => {
-    console.log(">>>customers=" + customers);
-    dispatch(getCustomers());
-    
+    dispatch(customerList());
+
     // setLoading(true);
     // const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
 
@@ -40,8 +38,8 @@ function CustomersScreen() {
 
   return (
     <>
-      {state.loading && <SkeletonCustomers />}
-      {!state.loading && (
+      {loading && <SkeletonCustomers />}
+      {!loading && (
         <div>
           <div className="customerSearch">
             <TextField
@@ -55,7 +53,7 @@ function CustomersScreen() {
               <li key={customer.id}>
                 <CustomerCard
                   customer={customer}
-                  imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+                  imagePath={AVATAR_IMAGE_PATH + "/" + 1 + ".png"}
                 ></CustomerCard>
               </li>
             ))}
