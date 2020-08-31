@@ -1,12 +1,10 @@
 import axios from "axios";
-const {
-    CUSTOMER_LIST_REQUEST,
-    CUSTOMER_LIST_SUCCESS,
-    CUSTOMER_LIST_FAIL,
-  } = require("../constants/customerConstants");
-
-
 import { CUSTOMERS_URI } from "../../utils/constants";
+const {
+  CUSTOMER_LIST_REQUEST,
+  CUSTOMER_LIST_SUCCESS,
+  CUSTOMER_LIST_FAIL,
+} = require("../constants/customerConstants");
 
 const getCustomers = () => async (dispatch) => {
   try {

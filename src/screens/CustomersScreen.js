@@ -6,7 +6,8 @@ import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
 import { AVATAR_IMAGE_PATH } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { getCustomers } from "../services/customerService";
+import { getCustomers } from "../redux/actions/customerAction";
+
 
 function CustomersScreen() {
   const state = useSelector((state) => state);
