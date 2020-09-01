@@ -1,6 +1,10 @@
 import axios from "axios";
 import { CUSTOMERS_URI } from "../../utils/constants";
-import { search, getCust } from "../../services/customerService";
+import {
+  search,
+  getCust,
+  deleteCustomer,
+} from "../../services/customerService";
 const {
   CUSTOMER_LIST_REQUEST,
   CUSTOMER_LIST_SUCCESS,
@@ -8,6 +12,9 @@ const {
   CUSTOMER_GET_REQUEST,
   CUSTOMER_GET_SUCCESS,
   CUSTOMER_GET_FAIL,
+  CUSTOMER_DELETE_REQUEST,
+  CUSTOMER_DELETE_SUCCESS,
+  CUSTOMER_DELETE_FAIL,
 } = require("../constants/customerConstants");
 
 const customerList = (searchBy) => async (dispatch) => {
@@ -35,4 +42,17 @@ const customerGet = (id) => async (dispatch) => {
     dispatch({ type: CUSTOMER_GET_FAIL, payload: error });
   }
 };
-export { customerList, customerGet };
+
+const customerDelete = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: CUSTOMER_DELETE_REQUEST });
+
+    const response = await deleteCustomer(id);
+    dispatch({ type: CUSTOMER_DELETE_SUCCESS, payload: id });
+
+    //customerList("");
+  } catch (error) {
+    dispatch({ type: CUSTOMER_DELETE_FAIL, payload: error });
+  }
+};
+export { customerList, customerGet, customerDelete };
