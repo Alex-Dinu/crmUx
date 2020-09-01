@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes, { shape } from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function CustomerCard(props) {
@@ -34,11 +34,10 @@ function CustomerCard(props) {
 
 CustomerCard.propTypes = {
   customer: PropTypes.shape({
-    id:PropTypes.string.isRequired,
-    emailAddress:PropTypes.string,
-    firstName:PropTypes.string.isRequired,
-    lastName:PropTypes.string.isRequired
-
+    id: PropTypes.string.isRequired,
+    emailAddress: PropTypes.string,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
   }),
   imagePath: PropTypes.string,
 };

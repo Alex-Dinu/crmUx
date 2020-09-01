@@ -1,34 +1,39 @@
-// import React from "react";
-// import PropTypes from "prop-types";
-// import CustomerCard from "./CustomerCard";
+import React from "react";
+import PropTypes from "prop-types";
+import CustomerCard from "./CustomerCard";
+import { TextField } from "@material-ui/core";
+import { AVATAR_IMAGE_PATH } from "../../utils/constants";
+function Customers(props) {
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
 
-// function Customers(props) {
-//   const imagePath = "../images/avatars";
+  return (
+    <div>
+      <div className="customerSearch">
+        <TextField
+          className="customers-search"
+          id="standard-basic"
+          label="Search for Customers"
+        />
+      </div>
+      <ul className="customers">
+        {props.customers.map((customer) => (
+          <li key={customer.id}>
+            <CustomerCard
+              customer={customer}
+              imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+            ></CustomerCard>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-//   function getRandomInt(max) {
-//     return Math.floor(Math.random() * Math.floor(max));
-//   }
+Customers.propTypes = {
+  customers: PropTypes.object.isRequired,
+  avatarImagePath: PropTypes.string,
+};
 
-//   return (
-//     <>
-//       <ul className="customers">
-//         {props.customers.map((customer) => (
-//           <li key={customer.id}>
-//             <CustomerCard
-//               customer={customer}
-//               imagePath={imagePath + "/" + getRandomInt(6) + ".png"}
-//               deleteCustomerHandler={deleteCustomerHandler}
-//               updateCustomerHandler={updateCustomerHandler}
-//             ></CustomerCard>
-//           </li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// }
-
-// Customers.propTypes = {
-//   customers: PropTypes.array,
-// };
-
-// export default Customers;
+export default Customers;

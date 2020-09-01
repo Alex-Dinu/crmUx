@@ -24,7 +24,7 @@ function CustomerScreen(props) {
   }
 
   useEffect(() => {
-    if (customer.id == undefined) {
+    if (customer.id === undefined) {
       data.getCustomer().then((res) => {
         setCustomer(res.customer);
       });
