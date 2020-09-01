@@ -1,33 +1,43 @@
-//"use strict";
-import Axios from "axios";
-import { CUSTOMERS_URI } from "../utils/constants";
+import axios from "axios";
 
-// module.exports = {
-//   get: () => {
-//     return Promise.resolve({
-//       customers: [
-//         {
-//           id: "1",
-//           firstName: "F1",
-//           lastName: "L1",
-//           emailAddress: "F1.L1@here.com",
-//         },
-//         {
-//           id: "2",
-//           firstName: "F2",
-//           lastName: "L2",
-//           emailAddress: "F2.L2@here.com",
-//         },
-//       ],
-//     });
-//   },
-// };
+const resources = {};
 
-export async function getCustomers() {
+const makeCustomerRequest = () => {
+  let cancel;
 
-  try {
-    const { data } = await Axios.post(CUSTOMERS_URI, {});
-    return data.id;
-  } catch (error) {
-  }
-}
+  return async (query) => {
+    if (cancel) {
+      // Cancel the previous request before making a new request
+      cancel.cancel();
+    }
+    // Create a new CancelToken
+    cancel = axios.CancelToken.source();
+    try {
+      if (resources[query]) {
+        // Return result if it exists
+        return resources[query];
+      }
+      const {
+        data,
+      } = await axios.get(
+        "http://localhost:8080/api/customer/search/" + query,
+        { cancelToken: cancel.token }
+      );
+
+      // Store response
+      resources[query] = data;
+
+      return data;
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        // Handle if request was cancelled
+        console.log("Request canceled", error.message);
+      } else {
+        // Handle usual errors
+        console.log("Something went wrong: ", error.message);
+      }
+    }
+  };
+};
+
+export const search = makeCustomerRequest();
