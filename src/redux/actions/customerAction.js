@@ -1,10 +1,13 @@
 import axios from "axios";
 import { CUSTOMERS_URI } from "../../utils/constants";
-import { search } from "../../services/customerService";
+import { search, getCust } from "../../services/customerService";
 const {
   CUSTOMER_LIST_REQUEST,
   CUSTOMER_LIST_SUCCESS,
   CUSTOMER_LIST_FAIL,
+  CUSTOMER_GET_REQUEST,
+  CUSTOMER_GET_SUCCESS,
+  CUSTOMER_GET_FAIL,
 } = require("../constants/customerConstants");
 
 const customerList = (searchBy) => async (dispatch) => {
@@ -21,4 +24,15 @@ const customerList = (searchBy) => async (dispatch) => {
   }
 };
 
-export { customerList };
+const customerGet = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: CUSTOMER_GET_REQUEST });
+
+    const customer = await getCust(id);
+
+    dispatch({ type: CUSTOMER_GET_SUCCESS, payload: customer });
+  } catch (error) {
+    dispatch({ type: CUSTOMER_GET_FAIL, payload: error });
+  }
+};
+export { customerList, customerGet };

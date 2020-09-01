@@ -1,8 +1,22 @@
 import axios from "axios";
-
+import { CUSTOMERS_URI } from "../utils/constants";
 const resources = {};
 
-const makeCustomerRequest = () => {
+// const getCustomer = () => {
+//   return async (id) => {
+//     const { data } = await axios.get(CUSTOMERS_URI + "/" + id);
+//     return data;
+//   };
+// };
+
+export const getCust = async (id) => {
+  var data = await axios.get(CUSTOMERS_URI + id);
+  return data.data;
+};
+
+//export const get = getCustomer();
+
+const getCustomers = () => {
   let cancel;
 
   return async (query) => {
@@ -40,4 +54,4 @@ const makeCustomerRequest = () => {
   };
 };
 
-export const search = makeCustomerRequest();
+export const search = getCustomers();
