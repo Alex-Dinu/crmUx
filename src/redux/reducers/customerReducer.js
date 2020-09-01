@@ -5,6 +5,9 @@ import {
   CUSTOMER_GET_REQUEST,
   CUSTOMER_GET_SUCCESS,
   CUSTOMER_GET_FAIL,
+  CUSTOMER_UPDATE_REQUEST,
+  CUSTOMER_UPDATE_SUCCESS,
+  CUSTOMER_UPDATE_FAIL,
 } from "../constants/customerConstants";
 
 const customersInitialState = { customers: [], loading: false, error: "" };
@@ -41,4 +44,18 @@ function customerReducer(state = customerInitialState, action) {
   }
 }
 
-export { customerListReducer, customerReducer };
+const customerUpdateInitialState = { customerUpdate: {}, loading: false, error: "" };
+
+function customerUpdateReducer(state = customerUpdateInitialState, action) {
+  switch (action.type) {
+    case CUSTOMER_UPDATE_REQUEST:
+      return { loading: true, state };
+    case CUSTOMER_UPDATE_SUCCESS:
+      return { loading: false, customerUpdate: action.payload };
+    case CUSTOMER_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+export { customerListReducer, customerReducer,customerUpdateReducer };
