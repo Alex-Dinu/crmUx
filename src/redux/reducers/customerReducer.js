@@ -20,30 +20,26 @@ function customerListReducer(state = customersInitialState, action) {
   switch (action.type) {
     case CUSTOMER_LIST_REQUEST:
       console.log(">>> reducer 1");
-      return {...state, loading: true };
+      return { ...state, loading: true };
     case CUSTOMER_LIST_SUCCESS:
       console.log(">>> reducer 2");
       return { ...state, loading: false, customers: action.payload };
     case CUSTOMER_LIST_FAIL:
       console.log(">>> reducer 3");
 
-
       return { ...state, loading: false, error: action.payload };
-
 
     default:
       return state;
   }
 }
 
-
 const customerInitialState = {
   customer: {},
-  loading: true,
+  loading: false,
   error: "",
   isDeleted: false,
 };
-
 
 function customerReducer(state = customerInitialState, action) {
   switch (action.type) {

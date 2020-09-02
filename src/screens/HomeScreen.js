@@ -18,7 +18,7 @@ function HomeScreen(props) {
       .then((res) => {
         setActions(res.actions);
       })
-      .then(() => delay(3000))
+      .then(() => delay(2000))
       .then(() => setLoading(false));
 
     return () => {};

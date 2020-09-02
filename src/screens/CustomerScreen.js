@@ -29,6 +29,8 @@ function CustomerScreen(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
+
   // Get the customerId from the query string parameter.
   const customerId = new URLSearchParams(props.location.search).get(
     "customerid"
@@ -54,6 +56,9 @@ function CustomerScreen(props) {
     dispatch(customerDelete(customerId));
   };
 
+  const updateCustomerHandler = (customerId) => {
+
+  }
   const afterDeleteHandler = () => {
     history.push("/customersscreen");
   };
@@ -75,7 +80,7 @@ function CustomerScreen(props) {
   };
 
 
-  if (loading == true) {
+  if (loading == true || interactionsLoading== true) {
     return <SkeletonCustomerScreen></SkeletonCustomerScreen>;
   } else if (isDeleted == true) {
     return (
@@ -86,7 +91,7 @@ function CustomerScreen(props) {
         </button>
       </>
     );
-  } else if (loading == false && customer) {
+  } else if (loading == false && interactionsLoading == false && customer && interactions) {
     return (
       <>
         <div className="padding">
@@ -103,6 +108,15 @@ function CustomerScreen(props) {
             }}
           >
             Delete Customer
+          </button>
+          <button
+            className="button"
+            name="button"
+            onClick={() => {
+              updateCustomerHandler(customer.id);
+            }}
+          >
+            Update Customer
           </button>
             <button
               className="button"
