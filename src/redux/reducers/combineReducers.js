@@ -1,11 +1,17 @@
 import { combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
 
-import { customerListReducer, customerReducer } from "./customerReducer";
-import {interactionListReducer} from "./interactionReducer"
-
+import {
+  customerListReducer,
+  customerReducer,
+  customerMaintenanceReducer,
+} from "./customerReducer";
+import { interactionListReducer } from "./interactionReducer";
 
 export default combineReducers({
   customerList: customerListReducer,
   customer: customerReducer,
-  interactionList: interactionListReducer
+  customerMaintenance: customerMaintenanceReducer,
+  interactionList: interactionListReducer,
+  form: formReducer,
 });

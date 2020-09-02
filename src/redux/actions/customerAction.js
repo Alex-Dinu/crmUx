@@ -4,6 +4,8 @@ import {
   search,
   getCust,
   deleteCustomer,
+  updateCustomer,
+  addCustomer,
 } from "../../services/customerService";
 const {
   CUSTOMER_LIST_REQUEST,
@@ -18,6 +20,9 @@ const {
   CUSTOMER_UPDATE_REQUEST,
   CUSTOMER_UPDATE_SUCCESS,
   CUSTOMER_UPDATE_FAIL,
+  CUSTOMER_ADD_REQUEST,
+  CUSTOMER_ADD_SUCCESS,
+  CUSTOMER_ADD_FAIL,
 } = require("../constants/customerConstants");
 
 const customerList = (searchBy) => async (dispatch) => {
@@ -59,15 +64,32 @@ const customerDelete = (id) => async (dispatch) => {
   }
 };
 
-const customerUpdate = (id) => async (dispatch) => {
+const customerUpdate = (customer) => async (dispatch) => {
   try {
-    dispatch({ type: CUSTOMER_GET_REQUEST });
+    dispatch({ type: CUSTOMER_UPDATE_REQUEST });
 
-    const customer = await getCust(id);
+    const response = await updateCustomer(customer);
 
-    dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: customer });
+    dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: response });
   } catch (error) {
     dispatch({ type: CUSTOMER_UPDATE_FAIL, payload: error });
   }
 };
-export { customerList, customerGet, customerDelete, customerUpdate  };
+const customerAdd = (customer) => async (dispatch) => {
+  try {
+    dispatch({ type: CUSTOMER_ADD_REQUEST, payload: customer });
+
+    const newCustomer = await addCustomer(customer);
+
+    dispatch({ type: CUSTOMER_ADD_SUCCESS, payload: newCustomer });
+  } catch (error) {
+    dispatch({ type: CUSTOMER_ADD_FAIL, payload: error });
+  }
+};
+export {
+  customerList,
+  customerGet,
+  customerDelete,
+  customerUpdate,
+  customerAdd,
+};

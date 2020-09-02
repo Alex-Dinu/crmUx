@@ -17,7 +17,9 @@ body {
 button {
   font-size: 1.6rem;
 }
-
+input:invalid {
+  border-color: red;
+}
 .link {
   text-decoration: none;
 }
@@ -203,7 +205,9 @@ footer {
   align-items: center;
   padding: 1rem;
   border: 1rem;
+
   font-size: 3rem;
+
 }
 
 /* ******************************************************** */
@@ -417,4 +421,16 @@ footer {
 .crm-description {
   padding: 1em;
   font-size: small;
+}
+
+/* ******************************************************** */
+/*                          Customer Maintenance  */
+/* ******************************************************** */
+.customerMaintenance {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-start;
+  flex: 1;
 }
