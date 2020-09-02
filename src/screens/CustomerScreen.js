@@ -5,12 +5,16 @@ import data from "../screens/__mocks__/customerService";
 import inter from "../screens/__mocks__/InteractionService";
 import CustomerCard from "../components/customer/CustomerCard";
 import { customerGet } from "../redux/actions/customerAction";
+import { interactionList } from "../redux/actions/interactionAction";
 import InteractionCard from "../components/interactions/InteractionCard";
 import { AVATAR_IMAGE_PATH } from ".././utils/constants";
 
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
-  const { customer, loading, error } = state.customer;
+  const { customer, loading} = state.customer;
+  const { interactions } = state.interactionList;
+  const interactionsLoading = state.interactionList.loading;
+  
   //const [customer, setCustomer] = useState({});
   //const [interactions, setInteractions] = useState([]);
   const history = useHistory();
@@ -29,6 +33,7 @@ function CustomerScreen(props) {
 
   useEffect(() => {
     dispatch(customerGet(customerId));
+    dispatch(interactionList(customerId));
 
     // inter.get().then((res) => {
     //   setInteractions(res.interactions);
@@ -58,43 +63,43 @@ function CustomerScreen(props) {
   };
   return (
     <>
-      {!loading && (
-        <div>
-          <CustomerCard
-            customer={customer}
-            imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
-          ></CustomerCard>
-          <button
-            className="button"
-            name="button"
-            onClick={() => {
-              deleteCustomerHandler();
-            }}
-          >
-            Delete Customer
-          </button>
+      {!loading && !interactionsLoading &&
+        (
+          <div>
+            <CustomerCard
+              customer={customer}
+              imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+            ></CustomerCard>
+            <button
+              className="button"
+              name="button"
+              onClick={() => {
+                deleteCustomerHandler();
+              }}>Delete Customer
+            </button>
 
-          {/* <button
-        className="button"
-        name="button"
-        onClick={() => {
-          addInteractionHandler();
-        }}
-      >
-        Add Interaction
-      </button>
-      <ul className="interactions">
-        {interactions.map((interaction) => (
-          <li key={interaction.id}>
-            <InteractionCard
-              interaction={interaction}
-              deleteInteractionHandler={deleteInteractionHandler}
-            ></InteractionCard>
-          </li>
-        ))}
-      </ul> */}
-        </div>
-      )}
+            <button
+              className="button"
+              name="button"
+              onClick={() => {
+                addInteractionHandler();
+              }}>Add Interaction
+            </button>
+            <ul className="interactions">
+              {interactions.map((interaction) => {
+                return (
+                  <li key={interaction.id}>
+                    <InteractionCard
+                      interaction={interaction}
+                      deleteInteractionHandler={deleteInteractionHandler}
+                    ></InteractionCard>
+                  </li>
+                );
+              })}
+            </ul> 
+          </div>
+        )
+      }
     </>
   );
 }
