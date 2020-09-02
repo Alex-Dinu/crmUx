@@ -18,19 +18,32 @@ button {
   font-size: 1.6rem;
 }
 
-.button {
-  padding: 1rem;
-  border: 0.1rem #1134d1 solid;
-  border-radius: 1rem;
-  cursor: pointer;
-  background-color: #415bd1;
-  color: white;
-}
-.button:hover {
-  border: 0.1rem #8cc2ee solid;
-  color: #9dd1f3;
+.link {
+  text-decoration: none;
 }
 
+.button {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  color: #ffffff;
+  background: #415bd1;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+.button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.padding {
+  padding: 1em;
+}
 /* ******************************************************** */
 /*                        CONTAINER  */
 /* ******************************************************** */
@@ -205,8 +218,8 @@ footer {
   -webkit-border-radius: 17px 17px 17px 17px;
   border: 1px solid #2a2485;
   padding: 1em;
-  width: 20em;
-  height: 15em;
+  width: 15em;
+  height: 10em;
 }
 .customer a {
   text-decoration: none;
@@ -215,10 +228,12 @@ footer {
   font-size: 2rem;
   font-weight: bold;
   color: #2a2485;
+  text-decoration: none;
 }
 
 .customer-email {
   color: #2a2485;
+  text-decoration: none;
 }
 .customer-image {
   max-width: 5rem;
@@ -343,3 +358,61 @@ footer {
 /* ******************************************************** */
 
 /* TODO: Add styles. */
+
+/* ******************************************************** */
+/*                          Messages      */
+/* ******************************************************** */
+.SuccessMessage {
+  height: 100%;
+  border-radius: 17px 17px 17px 17px;
+  -moz-border-radius: 17px 17px 17px 17px;
+  -webkit-border-radius: 17px 17px 17px 17px;
+  border: 1px solid #2a2485;
+  padding: 1em;
+  width: 20em;
+  height: 15em;
+}
+
+/* ******************************************************** */
+/*                          Home  */
+/* ******************************************************** */
+
+.actions {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-start;
+}
+
+.actions li {
+  list-style-type: none;
+  padding: 0;
+  flex: 0 1 10rem;
+  margin: 1rem;
+}
+.action {
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  border-radius: 17px 17px 17px 17px;
+  -moz-border-radius: 17px 17px 17px 17px;
+  -webkit-border-radius: 17px 17px 17px 17px;
+  border: 1px solid #2a2485;
+  padding: 1em;
+  width: 8em;
+  height: 5em;
+}
+.homeMessage {
+  padding: 1em;
+  font-size: x-large;
+}
+.crm-image {
+  max-width: 5rem;
+  max-height: 5rem;
+}
+.crm-description {
+  padding: 1em;
+  font-size: small;
+}

@@ -7,6 +7,7 @@ import CustomerCard from "../components/customer/CustomerCard";
 import { customerGet, customerDelete } from "../redux/actions/customerAction";
 import InteractionCard from "../components/interactions/InteractionCard";
 import { AVATAR_IMAGE_PATH } from ".././utils/constants";
+import SkeletonCustomerScreen from "./SkeletonCustomerScreen";
 
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
@@ -40,6 +41,9 @@ function CustomerScreen(props) {
     dispatch(customerDelete(customerId));
   };
 
+  const afterDeleteHandler = () => {
+    history.push("/customersscreen");
+  };
   const addInteractionHandler = () => {
     console.log(
       ">>> CustomerScreen.addInteractionHandler customerId=" + customerId
@@ -58,21 +62,25 @@ function CustomerScreen(props) {
   };
 
   if (loading == true) {
-    return <h1>Loading...</h1>;
+    return <SkeletonCustomerScreen></SkeletonCustomerScreen>;
   } else if (isDeleted == true) {
     return (
-      <Link to="/customersscreen">
-        <div>Customer deleted.</div>
-      </Link>
+      <>
+        <div className="SuccessMessage">Customer deleted.</div>
+        <button className="button" onClick={() => afterDeleteHandler()}>
+          OK
+        </button>
+      </>
     );
   } else if (loading == false && customer) {
     return (
       <>
-        <div>
+        <div className="padding">
           <CustomerCard
             customer={customer}
             imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
           ></CustomerCard>
+          <div className="padding"></div>
           <button
             className="button"
             name="button"

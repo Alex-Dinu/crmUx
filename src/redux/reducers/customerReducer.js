@@ -43,7 +43,7 @@ const customerInitialState = {
 function customerReducer(state = customerInitialState, action) {
   switch (action.type) {
     case CUSTOMER_GET_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, isDeleted: false };
     case CUSTOMER_GET_SUCCESS:
       return { ...state, loading: false, customer: action.payload };
     case CUSTOMER_GET_FAIL:
