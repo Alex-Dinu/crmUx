@@ -61,7 +61,7 @@ const customerDelete = (id) => async (dispatch) => {
 
 const customerUpdate = (id) => async (dispatch) => {
   try {
-    dispatch({ type: CUSTOMER_GET_REQUEST });
+    dispatch({ type: CUSTOMER_UPDATE_REQUEST });
 
     const customer = await getCust(id);
 

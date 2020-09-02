@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
 
 import { customerListReducer, customerReducer } from "./customerReducer";
-import {interactionListReducer} from "./interactionReducer"
+import {interactionListReducer, interactionReducer} from "./interactionReducer"
 
 
 export default combineReducers({
   customerList: customerListReducer,
   customer: customerReducer,
-  interactionList: interactionListReducer
+  interactionList: interactionListReducer,
+  interaction: interactionReducer
 });
