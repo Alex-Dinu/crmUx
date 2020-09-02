@@ -9,6 +9,11 @@ const resources = {};
 //   };
 // };
 
+export const deleteCustomer = async (id) => {
+  var response = await axios.delete(CUSTOMERS_URI + id);
+  return response.data;
+};
+
 export const getCust = async (id) => {
   var data = await axios.get(CUSTOMERS_URI + id);
   return data.data;
@@ -27,19 +32,12 @@ const getCustomers = () => {
     // Create a new CancelToken
     cancel = axios.CancelToken.source();
     try {
-      if (resources[query]) {
-        // Return result if it exists
-        return resources[query];
-      }
       const {
         data,
       } = await axios.get(
         "http://localhost:8080/api/customer/search/" + query,
         { cancelToken: cancel.token }
       );
-
-      // Store response
-      resources[query] = data;
 
       return data;
     } catch (error) {

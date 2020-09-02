@@ -6,6 +6,7 @@ function CustomerCard(props) {
   return (
     // Route to the customer screen, sending the customerId as a quert string parameter.
     <Link
+      className="link"
       to={{
         pathname: "/customerscreen",
         search: "?customerid=" + props.customer.id,
@@ -34,11 +35,10 @@ function CustomerCard(props) {
 
 CustomerCard.propTypes = {
   customer: PropTypes.shape({
-    id:PropTypes.string.isRequired,
-    emailAddress:PropTypes.string,
-    firstName:PropTypes.string.isRequired,
-    lastName:PropTypes.string.isRequired
-
+    id: PropTypes.string.isRequired,
+    emailAddress: PropTypes.string,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
   }),
   imagePath: PropTypes.string,
 };
