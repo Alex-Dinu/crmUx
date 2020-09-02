@@ -2,13 +2,15 @@ import {
   CUSTOMER_LIST_REQUEST,
   CUSTOMER_LIST_SUCCESS,
   CUSTOMER_LIST_FAIL,
-  CUSTOMER_LIST_REMOVE_ONE_CUSTOMER,
   CUSTOMER_GET_REQUEST,
   CUSTOMER_GET_SUCCESS,
   CUSTOMER_GET_FAIL,
   CUSTOMER_DELETE_REQUEST,
   CUSTOMER_DELETE_SUCCESS,
   CUSTOMER_DELETE_FAIL,
+  CUSTOMER_UPDATE_REQUEST,
+  CUSTOMER_UPDATE_SUCCESS,
+  CUSTOMER_UPDATE_FAIL,
 } from "../constants/customerConstants";
 
 const customersInitialState = { customers: [], loading: false, error: "" };
@@ -25,9 +27,6 @@ function customerListReducer(state = customersInitialState, action) {
     case CUSTOMER_LIST_FAIL:
       console.log(">>> reducer 3");
       return { loading: false, error: action.payload };
-    // case CUSTOMER_LIST_REMOVE_ONE_CUSTOMER:
-    //   const c = state.customers.filter((c) => c.id !== action.payload);
-    //   return{...state, c};
     default:
       return state;
   }
@@ -63,6 +62,12 @@ function customerReducer(state = customerInitialState, action) {
         loading: false,
         error: action.payload,
       };
+    case CUSTOMER_UPDATE_REQUEST:
+      return { loading: true, state };
+    case CUSTOMER_UPDATE_SUCCESS:
+      return { loading: false, customerUpdate: action.payload };
+    case CUSTOMER_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

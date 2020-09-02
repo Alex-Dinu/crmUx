@@ -15,6 +15,9 @@ const {
   CUSTOMER_DELETE_REQUEST,
   CUSTOMER_DELETE_SUCCESS,
   CUSTOMER_DELETE_FAIL,
+  CUSTOMER_UPDATE_REQUEST,
+  CUSTOMER_UPDATE_SUCCESS,
+  CUSTOMER_UPDATE_FAIL,
 } = require("../constants/customerConstants");
 
 const customerList = (searchBy) => async (dispatch) => {
@@ -55,4 +58,16 @@ const customerDelete = (id) => async (dispatch) => {
     dispatch({ type: CUSTOMER_DELETE_FAIL, payload: error });
   }
 };
-export { customerList, customerGet, customerDelete };
+
+const customerUpdate = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: CUSTOMER_GET_REQUEST });
+
+    const customer = await getCust(id);
+
+    dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: customer });
+  } catch (error) {
+    dispatch({ type: CUSTOMER_UPDATE_FAIL, payload: error });
+  }
+};
+export { customerList, customerGet, customerDelete, customerUpdate  };
