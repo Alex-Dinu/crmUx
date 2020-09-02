@@ -13,31 +13,37 @@ import {
   CUSTOMER_UPDATE_FAIL,
 } from "../constants/customerConstants";
 
-const customersInitialState = { customers: [], loading: false, error: "" };
+const customersInitialState = { customers: [], loading: true, error: "" };
 
 function customerListReducer(state = customersInitialState, action) {
   console.log(">>> in reducer = " + action.type);
   switch (action.type) {
     case CUSTOMER_LIST_REQUEST:
       console.log(">>> reducer 1");
-      return { loading: true, state };
+      return {...state, loading: true };
     case CUSTOMER_LIST_SUCCESS:
       console.log(">>> reducer 2");
-      return { loading: false, customers: action.payload };
+      return { ...state, loading: false, customers: action.payload };
     case CUSTOMER_LIST_FAIL:
       console.log(">>> reducer 3");
-      return { loading: false, error: action.payload };
+
+
+      return { ...state, loading: false, error: action.payload };
+
+
     default:
       return state;
   }
 }
 
+
 const customerInitialState = {
   customer: {},
-  loading: false,
+  loading: true,
   error: "",
   isDeleted: false,
 };
+
 
 function customerReducer(state = customerInitialState, action) {
   switch (action.type) {

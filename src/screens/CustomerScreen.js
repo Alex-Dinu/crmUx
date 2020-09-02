@@ -4,14 +4,26 @@ import { useHistory, Link } from "react-router-dom";
 import data from "../screens/__mocks__/customerService";
 import inter from "../screens/__mocks__/InteractionService";
 import CustomerCard from "../components/customer/CustomerCard";
+
+
+import { interactionList } from "../redux/actions/interactionAction";
+
 import { customerGet, customerDelete } from "../redux/actions/customerAction";
+
 import InteractionCard from "../components/interactions/InteractionCard";
 import { AVATAR_IMAGE_PATH } from ".././utils/constants";
 import SkeletonCustomerScreen from "./SkeletonCustomerScreen";
 
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
+
+
+  const { interactions } = state.interactionList;
+  const interactionsLoading = state.interactionList.loading;
+  
+
   const { customer, loading, error, isDeleted } = state.customer;
+
   //const [customer, setCustomer] = useState({});
   //const [interactions, setInteractions] = useState([]);
   const history = useHistory();
@@ -30,6 +42,7 @@ function CustomerScreen(props) {
 
   useEffect(() => {
     dispatch(customerGet(customerId));
+    dispatch(interactionList(customerId));
 
     // inter.get().then((res) => {
     //   setInteractions(res.interactions);
@@ -61,6 +74,7 @@ function CustomerScreen(props) {
     );
   };
 
+
   if (loading == true) {
     return <SkeletonCustomerScreen></SkeletonCustomerScreen>;
   } else if (isDeleted == true) {
@@ -90,10 +104,30 @@ function CustomerScreen(props) {
           >
             Delete Customer
           </button>
+            <button
+              className="button"
+              name="button"
+              onClick={() => {
+                addInteractionHandler();
+              }}>Add Interaction
+            </button>
+            <ul className="interactions">
+              {interactions.map((interaction) => {
+                return (
+                  <li key={interaction.id}>
+                    <InteractionCard
+                      interaction={interaction}
+                      deleteInteractionHandler={deleteInteractionHandler}
+                    ></InteractionCard>
+                  </li>
+                );
+              })}
+            </ul> 
         </div>
       </>
     );
   }
+
 }
 
 export default CustomerScreen;
