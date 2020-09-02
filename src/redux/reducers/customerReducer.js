@@ -11,6 +11,9 @@ import {
   CUSTOMER_UPDATE_REQUEST,
   CUSTOMER_UPDATE_SUCCESS,
   CUSTOMER_UPDATE_FAIL,
+  CUSTOMER_ADD_REQUEST,
+  CUSTOMER_ADD_SUCCESS,
+  CUSTOMER_ADD_FAIL,
 } from "../constants/customerConstants";
 
 const customersInitialState = { customers: [], loading: true, error: "" };
@@ -65,14 +68,36 @@ function customerReducer(state = customerInitialState, action) {
         error: action.payload,
       };
     case CUSTOMER_UPDATE_REQUEST:
-      return { loading: true, state };
+      return { ...state, loading: true };
     case CUSTOMER_UPDATE_SUCCESS:
-      return { loading: false, customerUpdate: action.payload };
+      return { ...state, loading: false, customer: action.payload };
     case CUSTOMER_UPDATE_FAIL:
-      return { loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+}
+const customerMaintenanceInitialState = {
+  customer: {},
+  error: "",
+  operationCompleted: false,
+};
+
+function customerMaintenanceReducer(
+  state = customerMaintenanceInitialState,
+  action
+) {
+  switch (action.type) {
+    case CUSTOMER_ADD_REQUEST:
+      return { ...state, customer: action.payload };
+    case CUSTOMER_ADD_SUCCESS:
+      return { ...state, operationCompleted: true, customer: action.payload };
+    case CUSTOMER_ADD_FAIL:
+      return { ...state, operationCompleted: true, error: action.payload };
     default:
       return state;
   }
 }
 
-export { customerListReducer, customerReducer };
+export { customerListReducer, customerReducer, customerMaintenanceReducer };

@@ -5,7 +5,6 @@ import data from "../screens/__mocks__/customerService";
 import inter from "../screens/__mocks__/InteractionService";
 import CustomerCard from "../components/customer/CustomerCard";
 
-
 import { interactionList } from "../redux/actions/interactionAction";
 
 import { customerGet, customerDelete } from "../redux/actions/customerAction";
@@ -17,10 +16,8 @@ import SkeletonCustomerScreen from "./SkeletonCustomerScreen";
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
 
-
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
-  
 
   const { customer, loading, error, isDeleted } = state.customer;
 
@@ -53,12 +50,16 @@ function CustomerScreen(props) {
   }, []);
 
   const deleteCustomerHandler = (customerId) => {
-    dispatch(customerDelete(customerId));
+    dispatch(customerDelete(customerId)).then(() =>
+      history.push("/customersscreen")
+    );
   };
 
   const updateCustomerHandler = (customerId) => {
+    history.push("/customermaintenancescreen/?customerId=" + customerId);
+  };
 
-  }
+  const addCustomerHandler = () => {};
   const afterDeleteHandler = () => {
     history.push("/customersscreen");
   };
@@ -79,8 +80,7 @@ function CustomerScreen(props) {
     );
   };
 
-
-  if (loading == true || interactionsLoading== true) {
+  if (loading == true || interactionsLoading == true) {
     return <SkeletonCustomerScreen></SkeletonCustomerScreen>;
   } else if (isDeleted == true) {
     return (
@@ -91,7 +91,12 @@ function CustomerScreen(props) {
         </button>
       </>
     );
-  } else if (loading == false && interactionsLoading == false && customer && interactions) {
+  } else if (
+    loading == false &&
+    interactionsLoading == false &&
+    customer &&
+    interactions
+  ) {
     return (
       <>
         <div className="padding">
@@ -116,32 +121,42 @@ function CustomerScreen(props) {
               updateCustomerHandler(customer.id);
             }}
           >
-            Update Customer
+            Edit Customer
           </button>
-            <button
-              className="button"
-              name="button"
-              onClick={() => {
-                addInteractionHandler();
-              }}>Add Interaction
-            </button>
-            <ul className="interactions">
-              {interactions.map((interaction) => {
-                return (
-                  <li key={interaction.id}>
-                    <InteractionCard
-                      interaction={interaction}
-                      deleteInteractionHandler={deleteInteractionHandler}
-                    ></InteractionCard>
-                  </li>
-                );
-              })}
-            </ul> 
+          <button
+            className="button"
+            name="button"
+            onClick={() => {
+              addCustomerHandler();
+            }}
+          >
+            Add New Customer
+          </button>
+          <button
+            className="button"
+            name="button"
+            onClick={() => {
+              addInteractionHandler();
+            }}
+          >
+            Add Interaction
+          </button>
+          <ul className="interactions">
+            {interactions.map((interaction) => {
+              return (
+                <li key={interaction.id}>
+                  <InteractionCard
+                    interaction={interaction}
+                    deleteInteractionHandler={deleteInteractionHandler}
+                  ></InteractionCard>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </>
     );
   }
-
 }
 
 export default CustomerScreen;

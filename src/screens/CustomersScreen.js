@@ -8,6 +8,7 @@ import { AVATAR_IMAGE_PATH } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { customerList } from "../redux/actions/customerAction";
 import { useSetFocus } from "../utils/customHooks/useSetFocus";
+import { useHistory, Redirect } from "react-router-dom";
 
 function CustomersScreen() {
   const state = useSelector((state) => state);
@@ -16,10 +17,11 @@ function CustomersScreen() {
   // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const searchRef = useRef(null);
-
+  const history = useHistory();
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+
   //useSetFocus(searchRef);
   useEffect(() => {
     dispatch(customerList(searchQuery));
@@ -45,16 +47,6 @@ function CustomersScreen() {
       {!loading && (
         <div>
           <div className="customerSearch">
-            {/* <input
-              autoFocus
-              type="search"
-              name="csearch"
-              id="csearch"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              ref={searchRef}
-              value={searchQuery}
-            /> */}
-
             <TextField
               autoFocus
               className="customerSearch"
@@ -65,6 +57,15 @@ function CustomersScreen() {
               ref={searchRef}
             />
           </div>
+          <button
+            className="button"
+            name="button"
+            onClick={() => {
+              history.push("/customermaintenancescreen/");
+            }}
+          >
+            Add Customer
+          </button>
           <ul className="customers">
             {customers.map((customer) => (
               <li key={customer.id}>
