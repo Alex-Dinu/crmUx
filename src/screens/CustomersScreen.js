@@ -51,7 +51,7 @@ function CustomersScreen() {
               autoFocus
               className="customerSearch"
               id="standard-basic"
-              label="Search for Customers"
+              label="Search for Customers" 
               onChange={(e) => setSearchQuery(e.target.value)}
               value={searchQuery}
               ref={searchRef}
