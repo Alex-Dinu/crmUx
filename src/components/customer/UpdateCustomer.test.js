@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import UpdateCustomer from "./UpdateCustomer";
 
-describe("The ProductImage component", () => {
+describe("The Customer Update component", () => {
   it("renders as expected", () => {
     const customer = {
       firstName: "John",
