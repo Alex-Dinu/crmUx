@@ -8,6 +8,7 @@ import CustomerCard from "../components/customer/CustomerCard";
 
 import { interactionList, interactionAdd, interactionDelete, interactionUpdate } from "../redux/actions/interactionAction";
 
+
 import { customerGet, customerDelete } from "../redux/actions/customerAction";
 
 import InteractionCard from "../components/interactions/InteractionCard";
@@ -16,12 +17,13 @@ import SkeletonCustomerScreen from "./SkeletonCustomerScreen";
 
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
+
   const [interactionMode, setInteractionMode] = useState("");
   const [interactionEditId, setInteractionEditId] = useState("");
 
+
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
-  
 
   const { customer, loading, error, isDeleted } = state.customer;
 
@@ -54,12 +56,16 @@ function CustomerScreen(props) {
   }, []);
 
   const deleteCustomerHandler = (customerId) => {
-    dispatch(customerDelete(customerId));
+    dispatch(customerDelete(customerId)).then(() =>
+      history.push("/customersscreen")
+    );
   };
 
   const updateCustomerHandler = (customerId) => {
+    history.push("/customermaintenancescreen/?customerId=" + customerId);
+  };
 
-  }
+  const addCustomerHandler = () => {};
   const afterDeleteHandler = () => {
     history.push("/customersscreen");
   };
@@ -123,8 +129,7 @@ function CustomerScreen(props) {
 
   };
 
-
-  if (loading == true || interactionsLoading== true) {
+  if (loading == true || interactionsLoading == true) {
     return <SkeletonCustomerScreen></SkeletonCustomerScreen>;
   } else if (isDeleted == true) {
     return (
@@ -135,7 +140,12 @@ function CustomerScreen(props) {
         </button>
       </>
     );
-  } else if (loading == false && interactionsLoading == false && customer && interactions) {
+  } else if (
+    loading == false &&
+    interactionsLoading == false &&
+    customer &&
+    interactions
+  ) {
     return (
       <>
         <div className="padding">
@@ -160,8 +170,9 @@ function CustomerScreen(props) {
               updateCustomerHandler(customer.id);
             }}
           >
-            Update Customer
+            Edit Customer
           </button>
+
             <button
               className="button"
               name="button"
@@ -193,11 +204,11 @@ function CustomerScreen(props) {
                 );
               })}
             </ul> 
+
         </div>
       </>
     );
   }
-
 }
 
 export default CustomerScreen;

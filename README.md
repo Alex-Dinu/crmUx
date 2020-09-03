@@ -24,7 +24,7 @@ Here are some of the features we implemented:
 
 ### Functionality
 
-- Customer Search
+- Customer Live Search
 
 # Un-implemented features
 
@@ -44,5 +44,7 @@ Here are some of the features we implemented:
   - Enable CORS \*\*\*
 
 # Areas of improvement
+
 ### State management
+
 - Reloading components when not needed.

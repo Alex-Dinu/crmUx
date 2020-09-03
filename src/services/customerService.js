@@ -14,6 +14,16 @@ export const deleteCustomer = async (id) => {
   return response.data;
 };
 
+export const updateCustomer = async (customer) => {
+  var response = await axios.put(CUSTOMERS_URI, customer);
+  return response.data;
+};
+
+export const addCustomer = async (customer) => {
+  var response = await axios.post(CUSTOMERS_URI, customer);
+  return response.data;
+};
+
 export const getCust = async (id) => {
   var data = await axios.get(CUSTOMERS_URI + id);
   return data.data;

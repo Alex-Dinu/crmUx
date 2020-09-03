@@ -8,6 +8,7 @@ import CustomersScreen from "./screens/CustomersScreen";
 import CustomerScreen from "./screens/CustomerScreen";
 import HelpScreen from "./screens/HelpScreen";
 import InteractionMaintenanceContainer from "./components/interactions/InteractionMaintenanceContainer";
+import CustomerMaintenanceScreen from "./screens/CustomerMaintenanceScreen";
 
 function App() {
   //TODO: Jest
@@ -30,6 +31,7 @@ function App() {
             <a href="/customersscreen">Customers</a>
             <a href="/signin">Sign In</a>
             <a href="/helpscreen">Help</a>
+            <a href="/customermaintenancescreen">Cust</a>
           </div>
         </nav>
       </div>
@@ -40,6 +42,7 @@ function App() {
           path="/interaction"
           component={InteractionMaintenanceContainer}
         />
+        <Route path="/customermaintenancescreen" component={CustomerMaintenanceScreen} />
         <Route path="/customerscreen" component={CustomerScreen} />
         <Route path="/customersscreen" component={CustomersScreen} />
         <Route path="/helpscreen" component={HelpScreen} />
