@@ -17,7 +17,9 @@ body {
 button {
   font-size: 1.6rem;
 }
-
+input:invalid {
+  border-color: red;
+}
 .link {
   text-decoration: none;
 }
@@ -198,10 +200,14 @@ footer {
 }
 
 .customerSearch {
+
   justify-content: center;
   align-items: center;
   padding: 1rem;
   border: 1rem;
+
+  font-size: 3rem;
+
 }
 
 /* ******************************************************** */
@@ -244,8 +250,8 @@ footer {
   padding: 1em;
   padding: 1em;
   width: 5em;
-  height: 1.25em;
-  font-size: 1.6em;
+  height: 2.25em;
+  font-size: 2.6em;
 }
 
 /* ******************************************************** */
@@ -311,7 +317,7 @@ footer {
   padding: 15px;
   margin: 10px 0 0.5em;
   color: white;
-  background: #6890b8;
+  background: #0060C2;
   /* css3 */
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -352,7 +358,7 @@ footer {
   top: -30px;
   left: 50px;
   border: 15px solid transparent;
-  border-bottom-color: #6890b8;
+  border-bottom-color: #0060c2;
   /* reduce the damage in FF3.0 */
   display: block;
   width: 0;
@@ -388,7 +394,7 @@ footer {
   border-radius: 17px 17px 17px 17px;
   -moz-border-radius: 17px 17px 17px 17px;
   -webkit-border-radius: 17px 17px 17px 17px;
-  border: 1px solid #2a2485;
+  border: 1px solid #0060c2;
   padding: 1em;
   width: 20em;
   height: 15em;
@@ -420,7 +426,7 @@ footer {
   border-radius: 17px 17px 17px 17px;
   -moz-border-radius: 17px 17px 17px 17px;
   -webkit-border-radius: 17px 17px 17px 17px;
-  border: 1px solid #2a2485;
+  border: 1px solid #0060c2;
   padding: 1em;
   width: 8em;
   height: 5em;
@@ -436,4 +442,16 @@ footer {
 .crm-description {
   padding: 1em;
   font-size: small;
+}
+
+/* ******************************************************** */
+/*                          Customer Maintenance  */
+/* ******************************************************** */
+.customerMaintenance {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-start;
+  flex: 1;
 }
