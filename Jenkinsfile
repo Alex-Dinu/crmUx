@@ -23,7 +23,7 @@ pipeline {
                 sh 'npm run-test a'
                 println 'Completed running unit tests.'
             }  
-        })
+        }
         stage('Delivery') {
             steps {
                 fileOperations([fileCopyOperation(
