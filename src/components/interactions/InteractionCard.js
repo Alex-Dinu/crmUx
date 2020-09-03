@@ -32,9 +32,7 @@ function InteractionCard(props) {
           />
         </div>
       );
-    } else {
-      return null;
-    }
+    }  
 
     else
     {
