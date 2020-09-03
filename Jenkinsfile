@@ -19,9 +19,12 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                println 'Starting running unit tests.'
-                sh 'CI=true npm test a'
-                println 'Completed running unit tests.'
+                catchError {
+                    println 'Starting running unit tests.'
+                    sh 'CI=true npm test a'
+                    println 'Completed running unit tests.'
+                }
+                echo 'tests failed'
             }  
         }
         stage('Delivery') {
