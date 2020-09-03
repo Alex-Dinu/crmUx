@@ -26,6 +26,7 @@ pipeline {
                         println 'Completed running unit tests.'
                     } catch (err) {
                         echo currentBuild.result
+                    }
                 }
             }  
         }
