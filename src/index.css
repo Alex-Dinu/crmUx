@@ -281,38 +281,11 @@ footer {
 /* ******************************************************** */
 /*                          Interaction Card */
 /* ******************************************************** */
-.interactionCard {
-  border-radius: 17px 17px 17px 17px;
-  -moz-border-radius: 17px 17px 17px 17px;
-  -webkit-border-radius: 17px 17px 17px 17px;
-  background-color: #6890b8;
-  padding: 1em;
-  font: white;
-}
-.interactionCardTextarea {
-  border-radius: 17px 17px 17px 17px;
-  -moz-border-radius: 17px 17px 17px 17px;
-  -webkit-border-radius: 17px 17px 17px 17px;
-  background-color: #6890b8;
-  padding: 1em;
-  font: white;
-  columns: 100;
-}
-.interactionCard li {
-  list-style-type: none;
-  padding: 3;
-  flex: 0 1 10rem;
-  margin: 1rem;
-}
 
 .iconButtons {
   float: right;
 }
-/* ============================================================================================================================
-== TWITTER
-** ============================================================================================================================ */
-
-.example-twitter {
+.interactionCard {
   position: relative;
   padding: 15px;
   margin: 10px 0 0.5em;
@@ -323,36 +296,19 @@ footer {
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
-.example-twitter textarea {
+.interactionCard textarea {
   color: white;
-  background: #6890b8;
+  background: #0060C2;
   /* css3 */
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
   width: 200px;
-  font-size: 1.6rem;
-}
-
-/* .example-twitter p {
-  font-size: 28px;
-  line-height: 1.25em;
-} */
-
-/* this isn't necessary, just saves me having to edit the HTML of the demo */
-.example-twitter:before {
-  /* content:url(twitter-logo.gif); */
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 155px;
-  height: 36px;
-  /* reduce the damage in FF3.0 */
-  display: block;
+  font: 1.6rem Helvetica;
 }
 
 /* creates the triangle */
-.example-twitter:after {
+.interactionCard:after {
   content: "";
   position: absolute;
   top: -30px;
@@ -364,11 +320,6 @@ footer {
   width: 0;
 }
 
-/* display of quote author (alternatively use a class on the element following the blockquote) */
-.example-twitter + p {
-  padding-left: 15px;
-  font: 14px Arial, sans-serif;
-}
 
 @media screen and (min-width: 576px) {
   #main {
