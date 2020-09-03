@@ -178,7 +178,7 @@ function CustomerScreen(props) {
                       mode="add"
                     ></InteractionCard>
                   </li>:null}
-              {interactions.sort((a,b) => a.dateTime === b.dateTime ? 0: a.dateTime > b.dateTime ? -1: 1).map((interaction) => {
+              {interactions.sort((a,b) => Date.parse(a.dateTime) == Date.parse(b.dateTime) ? 0: Date.parse(a.dateTime) > Date.parse(b.dateTime) ? -1: 1).map((interaction) => {
                 return (
                   <li key={interaction.id}>
                     <InteractionCard className="interactionCard"
