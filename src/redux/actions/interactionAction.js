@@ -30,7 +30,7 @@ const interactionDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: INTERACTION_DELETE_REQUEST });
 
-    const data = await deleteInteraction(id);
+    await deleteInteraction(id);
     dispatch({ type: INTERACTION_DELETE_SUCCESS, payload: id });
   } catch (error) {
     dispatch({ type: INTERACTION_DELETE_FAIL, payload: error });

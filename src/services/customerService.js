@@ -1,13 +1,7 @@
 import axios from "axios";
 import { CUSTOMERS_URI } from "../utils/constants";
-const resources = {};
 
-// const getCustomer = () => {
-//   return async (id) => {
-//     const { data } = await axios.get(CUSTOMERS_URI + "/" + id);
-//     return data;
-//   };
-// };
+
 
 export const deleteCustomer = async (id) => {
   var response = await axios.delete(CUSTOMERS_URI + id);

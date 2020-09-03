@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import CustomerCard from "../components/customer/CustomerCard";
 
@@ -27,12 +27,10 @@ function CustomerScreen(props) {
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
 
-  const { customer, loading, error, isDeleted } = state.customer;
+  const { customer, loading, isDeleted } = state.customer;
 
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
 
   // Get the customerId from the query string parameter.
   const customerId = new URLSearchParams(props.location.search).get(
@@ -63,7 +61,6 @@ function CustomerScreen(props) {
     // history.push("/customermaintenancescreen/?customerId=" + customerId);
   };
 
-  const addCustomerHandler = () => {};
   const afterDeleteHandler = () => {
     history.push("/customersscreen");
   };
@@ -138,9 +135,11 @@ function CustomerScreen(props) {
       ">>> CustomerScreen.deleteInteractionHandler interactionId = " +
         interactionId
     );
+
     dispatch(interactionDelete(interactionId))
       .then(dispatch(interactionList(customerId)));
     
+
   };
 
   if (loading == true || interactionsLoading == true) {

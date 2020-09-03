@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { CUSTOMERS_URI } from "../../utils/constants";
 import {
   search,
@@ -55,7 +55,7 @@ const customerDelete = (id) => async (dispatch) => {
   try {
     dispatch({ type: CUSTOMER_DELETE_REQUEST });
 
-    const response = await deleteCustomer(id);
+    await deleteCustomer(id);
     dispatch({ type: CUSTOMER_DELETE_SUCCESS, payload: id });
 
     //customerList("");
