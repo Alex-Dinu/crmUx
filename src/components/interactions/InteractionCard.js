@@ -10,6 +10,31 @@ function InteractionCard(props) {
     props.interaction.comments = e.target.value;
   }
 
+  const renderIconButtons = () => {
+    if( props.mode != "add" && props.mode !="edit")
+    {
+      return(
+       <div className = "iconButtons" >
+        &nbsp;&nbsp;&nbsp;
+        <img
+          src = {ACTIONS_IMAGE_PATH + "/edit.png"}
+          onClick={() => {
+            props.editInteractionHandler(props.interaction.id);
+          }}/>
+          &nbsp;
+        <img
+          src = {ACTIONS_IMAGE_PATH + "/delete.png"}
+          onClick={() => {
+            props.deleteInteractionHandler(props.interaction.id);
+          }}/>
+        </div>
+      );
+    }
+    else
+    {
+      return(null);
+    }
+  }
   const renderComment = () => {
     if( props.mode == "add" || props.mode =="edit")
     {
@@ -43,24 +68,6 @@ function InteractionCard(props) {
       return (
         <div>
           <p>{props.interaction.comments}</p>
-          <div>
-            <button
-              className="button"
-              name="button"
-              onClick={() => {
-                props.editInteractionHandler(props.interaction.id);
-              }}>
-              Edit
-            </button>
-            <button
-              className="button"
-              name="button"
-              onClick={() => {
-                props.deleteInteractionHandler(props.interaction.id);
-              }}>
-              Delete
-            </button>
-          </div>
         </div>
       );
     }
@@ -68,7 +75,7 @@ function InteractionCard(props) {
   return (
     <>
       <blockquote className="example-twitter">
-        <div>{props.interaction.dateTime}</div>
+        <div>{props.interaction.dateTime}{renderIconButtons()}</div>
         {renderComment()}
       </blockquote>
     </>
