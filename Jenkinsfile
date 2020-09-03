@@ -17,7 +17,7 @@ pipeline {
                 println 'Completed the build.'
             }
         }
-        stage('Run Tests' {
+        stage('Run Tests') {
             steps {
                 println 'Starting running unit tests.'
                 sh 'npm run-test a'
