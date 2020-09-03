@@ -20,7 +20,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 println 'Starting running unit tests.'
-                sh 'npm run-test a'
+                sh 'npm run test a'
                 println 'Completed running unit tests.'
             }  
         }
