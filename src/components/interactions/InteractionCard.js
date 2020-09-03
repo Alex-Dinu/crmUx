@@ -9,10 +9,11 @@ function InteractionCard(props) {
   }
 
   const renderIconButtons = () => {
+
     if (props.mode != "add" && props.mode != "edit") {
       return (
         <div className="iconButtons">
-          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <img
             alt="Edit"
             src={ACTIONS_IMAGE_PATH + "/edit.png"}
@@ -20,6 +21,7 @@ function InteractionCard(props) {
               props.editInteractionHandler(props.interaction.id);
             }}
           />
+
           &nbsp;
           <img
             alt="Delete"
@@ -33,19 +35,21 @@ function InteractionCard(props) {
     } else {
       return null;
     }
-  };
+
+    else
+    {
+      return(<div></div>);
+    }
+  }
+
   const renderComment = () => {
     if (props.mode == "add" || props.mode == "edit") {
       return (
         <div>
           <p>
-            <textarea
-              className="interactionCardTextarea"
-              id="comment"
-              onChange={handleTextChange}
-            >
-              {props.interaction.comments}
-            </textarea>
+
+            <textarea onChange={handleTextChange}>{props.interaction.comments}</textarea>
+
           </p>
           <div>
             <button
@@ -79,36 +83,19 @@ function InteractionCard(props) {
   };
   return (
     <>
-      <blockquote className="example-twitter">
-        <div>
-          {props.interaction.dateTime}
-          {renderIconButtons()}
-        </div>
+
+      <blockquote className="interactionCard">
+        <div><b>{props.interaction.dateTime}</b>{renderIconButtons()}</div>
+
         {renderComment()}
       </blockquote>
     </>
-    // <div className="interactionCard">
-    //   <div>{props.interaction.date}</div>
-    //   <div>{props.interaction.comments}</div>
-    //   <div>
-    //     <button
-    //       className="button"
-    //       name="button"
-    //       onClick={() => {
-    //         props.deleteInteractionHandler(props.interaction.id);
-    //       }}
-    //     >
-    //       Delete Interaction
-    //     </button>
-    //   </div>
-
-    // </div>
   );
 }
 
-InteractionCard.propTypes = {
-  // TODO: interaction shape.
-  deleteInteractionHandler: PropTypes.func,
-};
+// InteractionCard.propTypes = {
+//   // TODO: interaction shape.
+//   deleteInteractionHandler: PropTypes.func,
+// };
 
 export default InteractionCard;

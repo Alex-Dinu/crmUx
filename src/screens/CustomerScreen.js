@@ -83,25 +83,24 @@ function CustomerScreen(props) {
         interaction.comments
     );
 
+    const cleanUp = () =>{
+      clearInteractionMode();
+      dispatch(interactionList(customerId));
+    }
+
     if (mode == "add") {
-      dispatch(interactionAdd(interaction)).then(() => {
-        clearInteractionMode();
-        dispatch(interactionList(customerId));
-      });
+      dispatch(interactionAdd(interaction)).then(cleanUp());
     } else if (mode == "edit") {
       interaction.dateTime = "";
-      dispatch(interactionUpdate(interaction)).then(() => {
-        clearInteractionMode();
-        dispatch(interactionList(customerId));
-      });
+      dispatch(interactionUpdate(interaction)).then(cleanUp());
     }
   };
 
   const cancelInteractionHandler = () => {
     console.log(">>> CustomerScreen.cancelInteractionHandler");
-    if (interactionMode == "edit") dispatch(interactionList(customerId));
-
     clearInteractionMode();
+    if (interactionMode == "edit") 
+      dispatch(interactionList(customerId));
   };
 
   const editInteractionHandler = (id) => {
@@ -115,9 +114,11 @@ function CustomerScreen(props) {
       ">>> CustomerScreen.deleteInteractionHandler interactionId = " +
         interactionId
     );
-    dispatch(interactionDelete(interactionId)).then(
-      dispatch(interactionList(customerId))
-    );
+
+    dispatch(interactionDelete(interactionId))
+      .then(dispatch(interactionList(customerId)));
+    
+
   };
 
   if (loading == true || interactionsLoading == true) {
