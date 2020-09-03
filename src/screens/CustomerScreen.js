@@ -16,7 +16,8 @@ import SkeletonCustomerScreen from "./SkeletonCustomerScreen";
 
 function CustomerScreen(props) {
   const state = useSelector((state) => state);
-  const [adding, setAdding] = useState(false);
+  const [interactionMode, setInteractionMode] = useState("");
+  const [interactionEditId, setInteractionEditId] = useState("");
 
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
@@ -62,33 +63,55 @@ function CustomerScreen(props) {
   const afterDeleteHandler = () => {
     history.push("/customersscreen");
   };
+
+  // Interactions handlers
+  
+  function clearInteractionMode() {
+    setInteractionMode("");
+    setInteractionEditId("");
+  }
+
   const addInteractionHandler = () => {
     console.log(
       ">>> CustomerScreen.addInteractionHandler customerId=" + customerId
     );
-    setAdding(true);
-    // history.push({
-    //   pathname: "/interaction",
-    //   search: "?customerid=" + customerId,
-    // });
+    setInteractionMode("add")
   };
 
-  const saveInteractionHandler = (interaction) => {
+  const saveInteractionHandler = (interaction, mode) => {
     console.log(
       ">>> CustomerScreen.saveInteractionHandler comments=" + interaction.comments
     );
-    dispatch(interactionAdd(interaction));
-    setAdding(false);
+
+    if(mode == "add"){
+      dispatch(interactionAdd(interaction));
+    }
+    else if(mode == "edit"){
+      interaction.dateTime = "";
+      dispatch(interactionUpdate(interaction));
+    }
+
+    clearInteractionMode();
     dispatch(interactionList(customerId));
   };
+
   const cancelInteractionHandler = () => {
     console.log(
       ">>> CustomerScreen.cancelInteractionHandler"
     );
-    setAdding(false);
+    if(interactionMode == "edit")
+      dispatch(interactionList(customerId));
+   
+    clearInteractionMode();
   };
 
-
+  const editInteractionHandler = (id) => {
+    console.log(
+      ">>> CustomerScreen.editInteractionHandler id=" + id
+    );
+    setInteractionMode("edit")
+    setInteractionEditId(id);
+  };
 
   const deleteInteractionHandler = (interactionId) => {
     console.log(
@@ -147,12 +170,12 @@ function CustomerScreen(props) {
               }}>Add Interaction
             </button>
             <ul className="interactions">
-              {adding ? <li>
+              {interactionMode == 'add' ? <li>
                     <InteractionCard className="interactionCard"
                       interaction={{customerId:customerId}}
                       saveInteractionHandler={saveInteractionHandler} 
                       cancelInteractionHandler={cancelInteractionHandler} 
-                      add="true"
+                      mode="add"
                     ></InteractionCard>
                   </li>:null}
               {interactions.sort((a,b) => a.dateTime === b.dateTime ? 0: a.dateTime > b.dateTime ? -1: 1).map((interaction) => {
@@ -160,8 +183,11 @@ function CustomerScreen(props) {
                   <li key={interaction.id}>
                     <InteractionCard className="interactionCard"
                       interaction={interaction}
+                      editInteractionHandler={editInteractionHandler} 
                       deleteInteractionHandler={deleteInteractionHandler} 
-                      add = "false"
+                      saveInteractionHandler={saveInteractionHandler} 
+                      cancelInteractionHandler={cancelInteractionHandler} 
+                     mode = {interactionEditId == interaction.id ? "edit" : ""}
                     ></InteractionCard>
                   </li>
                 );

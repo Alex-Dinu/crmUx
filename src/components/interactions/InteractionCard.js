@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ACTIONS_IMAGE_PATH } from "../../utils/constants";
+
 //http://nicolasgallagher.com/pure-css-speech-bubbles/demo/
 function InteractionCard(props) {
 
@@ -9,7 +11,7 @@ function InteractionCard(props) {
   }
 
   const renderComment = () => {
-    if( props.add == "true")
+    if( props.mode == "add" || props.mode =="edit")
     {
       return(
         <div>
@@ -21,7 +23,7 @@ function InteractionCard(props) {
               className="button"
               name="button"
               onClick={() => {
-                props.saveInteractionHandler(props.interaction);
+                props.saveInteractionHandler(props.interaction, props.mode);
               }}>
               Save
             </button>
@@ -46,9 +48,17 @@ function InteractionCard(props) {
               className="button"
               name="button"
               onClick={() => {
+                props.editInteractionHandler(props.interaction.id);
+              }}>
+              Edit
+            </button>
+            <button
+              className="button"
+              name="button"
+              onClick={() => {
                 props.deleteInteractionHandler(props.interaction.id);
               }}>
-              Delete Interaction
+              Delete
             </button>
           </div>
         </div>

@@ -19,7 +19,7 @@ export const deleteInteraction = async (id) => {
 };
 
 export const updateInteraction = async (interaction) => {
-  var response = await axios.put(INTERACTIONS_URI + interaction.id, interaction);
+  var response = await axios.put(INTERACTIONS_URI, interaction);
   return response.data;
 };
 
