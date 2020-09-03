@@ -5,7 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CustomersScreen from "./screens/CustomersScreen";
 import CustomerScreen from "./screens/CustomerScreen";
 import HelpScreen from "./screens/HelpScreen";
-import InteractionMaintenanceContainer from "./components/interactions/InteractionMaintenanceContainer";
+//import InteractionMaintenanceContainer from "./components/interactions/InteractionMaintenanceContainer";
 import CustomerMaintenanceScreen from "./screens/CustomerMaintenanceScreen";
 
 function App() {
@@ -34,10 +34,10 @@ function App() {
 
       <div className="main">
         {/* <div className="content"> */}
-        <Route
+        {/* <Route
           path="/interaction"
           component={InteractionMaintenanceContainer}
-        />
+        /> */}
         <Route
           path="/customermaintenancescreen"
           component={CustomerMaintenanceScreen}

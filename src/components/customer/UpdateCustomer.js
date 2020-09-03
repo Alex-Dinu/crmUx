@@ -16,11 +16,11 @@ function UpdateCustomer(props) {
     };
   }, []);
   return (
-    <form className="customerMaintenance"
+    <form
+      className="customerMaintenance"
       onSubmit={(event) => {
         event.preventDefault();
         props.onSubmitHandler(customer);
-        //setUser(initialFormState);
       }}
     >
       <label for="firstName">First Name</label>
