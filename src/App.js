@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import HomeScreen from "./screens/HomeScreen";
-import SignOut from "./screens/SignOut";
-import SignIn from "./screens/SignIn";
 import CustomersScreen from "./screens/CustomersScreen";
 import CustomerScreen from "./screens/CustomerScreen";
 import HelpScreen from "./screens/HelpScreen";
@@ -29,9 +27,7 @@ function App() {
           <div id="hamitems">
             <a href="/">Home</a>
             <a href="/customersscreen">Customers</a>
-            <a href="/signin">Sign In</a>
             <a href="/helpscreen">Help</a>
-            <a href="/customermaintenancescreen">Cust</a>
           </div>
         </nav>
       </div>
@@ -42,12 +38,14 @@ function App() {
           path="/interaction"
           component={InteractionMaintenanceContainer}
         />
-        <Route path="/customermaintenancescreen" component={CustomerMaintenanceScreen} />
+        <Route
+          path="/customermaintenancescreen"
+          component={CustomerMaintenanceScreen}
+        />
         <Route path="/customerscreen" component={CustomerScreen} />
         <Route path="/customersscreen" component={CustomersScreen} />
         <Route path="/helpscreen" component={HelpScreen} />
-        <Route path="/signout" component={SignOut} />
-        <Route path="/signin" component={SignIn} />
+
         <Route path="/" exact={true} component={HomeScreen} />
         {/* </div> */}
       </div>

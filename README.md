@@ -38,7 +38,7 @@ Here are some of the features we implemented:
 
 - Security
   - @EnableWebSecurity
-  - Authentication and jtw generation
+  - Authentication and jwt generation
   - Authorization in filters using jwt
   - Enable Https\SSH using spring-boot-starter-security
   - Enable CORS \*\*\*
