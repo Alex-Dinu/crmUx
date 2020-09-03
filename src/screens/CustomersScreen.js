@@ -6,8 +6,11 @@ import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
 import { AVATAR_IMAGE_PATH } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { customerList } from "../redux/actions/customerAction";
-import { useHistory } from "react-router-dom";
+
+import { customerList, customerAdd } from "../redux/actions/customerAction";
+import { useSetFocus } from "../utils/customHooks/useSetFocus";
+import { useHistory, Redirect } from "react-router-dom";
+
 
 function CustomersScreen() {
   const state = useSelector((state) => state);
@@ -17,6 +20,8 @@ function CustomersScreen() {
   const dispatch = useDispatch();
   const searchRef = useRef(null);
   const history = useHistory();
+  const [customerMode, setcustomerMode] = useState("");
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
@@ -28,6 +33,26 @@ function CustomersScreen() {
 
     return () => {};
   }, [searchQuery]);
+
+  const saveCustomerHandler = (customer, mode) => {
+    console.log(
+      ">>> CustomerScreen.saveCustomerHandler" 
+    );
+
+    const cleanUp = () =>{
+      setcustomerMode("");
+      dispatch(customerList(searchQuery));
+    }
+
+    dispatch(customerAdd(customer)).then(cleanUp());
+  };
+
+  const cancelCustomerHandler = () => {
+    console.log(">>> CustomerScreen.cancelCustomerHandler");
+    setcustomerMode("");
+    dispatch(customerList(searchQuery));
+  };
+
 
   return (
     <>
@@ -45,18 +70,33 @@ function CustomersScreen() {
               ref={searchRef}
             />
           </div>
-          <div className="addCustomerButton">
-            <button
-              className="button"
-              name="button"
-              onClick={() => {
-                history.push("/customermaintenancescreen/");
-              }}
-            >
-              Add Customer
-            </button>
-          </div>
+
+          <button
+            className="button"
+            name="button"
+            onClick={() => {
+              setcustomerMode("add");
+              // history.push("/customermaintenancescreen/");
+            }}
+          >
+            Add Customer
+          </button>
+
           <ul className="customers">
+          {customerMode == "add" ? (
+
+              <li>
+              <CustomerCard
+                customer={{}}
+                imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+                saveCustomerHandler={saveCustomerHandler}
+                cancelCustomerHandler={cancelCustomerHandler}
+                mode="add"
+            ></CustomerCard>
+              </li>
+
+            ) : null}
+           
             {customers.map((customer) => (
               <li key={customer.id}>
                 <CustomerCard
