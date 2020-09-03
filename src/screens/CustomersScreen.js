@@ -45,15 +45,17 @@ function CustomersScreen() {
               ref={searchRef}
             />
           </div>
-          <button
-            className="button"
-            name="button"
-            onClick={() => {
-              history.push("/customermaintenancescreen/");
-            }}
-          >
-            Add Customer
-          </button>
+          <div className="addCustomerButton">
+            <button
+              className="button"
+              name="button"
+              onClick={() => {
+                history.push("/customermaintenancescreen/");
+              }}
+            >
+              Add Customer
+            </button>
+          </div>
           <ul className="customers">
             {customers.map((customer) => (
               <li key={customer.id}>
