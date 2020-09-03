@@ -11,7 +11,7 @@ import {
   interactionUpdate,
 } from "../redux/actions/interactionAction";
 
-import { customerGet, customerDelete } from "../redux/actions/customerAction";
+import { customerGet, customerDelete, customerUpdate } from "../redux/actions/customerAction";
 
 import InteractionCard from "../components/interactions/InteractionCard";
 import { AVATAR_IMAGE_PATH } from ".././utils/constants";
@@ -22,6 +22,7 @@ function CustomerScreen(props) {
 
   const [interactionMode, setInteractionMode] = useState("");
   const [interactionEditId, setInteractionEditId] = useState("");
+  const [customerMode, setcustomerMode] = useState("");
 
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
@@ -58,7 +59,8 @@ function CustomerScreen(props) {
   };
 
   const updateCustomerHandler = (customerId) => {
-    history.push("/customermaintenancescreen/?customerId=" + customerId);
+    setcustomerMode("edit");
+    // history.push("/customermaintenancescreen/?customerId=" + customerId);
   };
 
   const addCustomerHandler = () => {};
@@ -106,6 +108,25 @@ function CustomerScreen(props) {
       dispatch(interactionList(customerId));
   };
 
+  const saveCustomerHandler = (customer, mode) => {
+    console.log(
+      ">>> CustomerScreen.saveCustomerHandler" 
+    );
+
+    const cleanUp = () =>{
+      setcustomerMode("");
+      dispatch(customerGet(customerId));
+    }
+
+    dispatch(customerUpdate(customer)).then(cleanUp());
+  };
+
+  const cancelCustomerHandler = () => {
+    console.log(">>> CustomerScreen.cancelCustomerHandler");
+    setcustomerMode("");
+    dispatch(customerGet(customerId));
+  };
+
   const editInteractionHandler = (id) => {
     console.log(">>> CustomerScreen.editInteractionHandler id=" + id);
     setInteractionMode("edit");
@@ -145,6 +166,9 @@ function CustomerScreen(props) {
           <CustomerCard
             customer={customer}
             imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+            saveCustomerHandler = {saveCustomerHandler}
+            cancelCustomerHandler = {cancelCustomerHandler}
+            mode = {customerMode}
           ></CustomerCard>
           <div className="padding"></div>
           <button

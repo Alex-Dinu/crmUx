@@ -230,6 +230,17 @@ footer {
 .customer a {
   text-decoration: none;
 }
+.customer textarea {
+  resize: none;
+}
+.customer-email textarea {
+  resize: none;
+  width: 17em;
+}
+.customer-name textarea {
+  resize: none;
+  width: 8em;
+}
 .customer-name {
   font-size: 2rem;
   font-weight: bold;
