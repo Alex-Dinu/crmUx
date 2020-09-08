@@ -11,7 +11,7 @@ function InteractionCard(props) {
   const renderIconButtons = () => {
     if (props.mode != "add" && props.mode != "edit") {
       return (
-        <div className="iconButtons">
+        <div className="iconButtons" data-test="iconButtons">
           &nbsp;&nbsp;&nbsp;
           <img
             alt="Edit"
@@ -41,6 +41,7 @@ function InteractionCard(props) {
           <p>
             <textarea
               className="interactionCardTextarea"
+              data-test="interactionCardTextarea"
               id="comment"
               onChange={handleTextChange}
             >
@@ -79,7 +80,7 @@ function InteractionCard(props) {
   };
   return (
     <>
-      <blockquote className="example-twitter">
+      <blockquote className="example-twitter" data-test="example-twitter">
         <div>
           {props.interaction.dateTime}
           {renderIconButtons()}
@@ -107,8 +108,16 @@ function InteractionCard(props) {
 }
 
 InteractionCard.propTypes = {
-  // TODO: interaction shape.
+  interaction: PropTypes.shape({
+    comment: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    datetime: PropTypes.dateTime,
+  }),
+  mode: PropTypes.string.isRequired,
   deleteInteractionHandler: PropTypes.func,
+  saveInteractionHandler: PropTypes.func,
+  cancelInteractionHandler: PropTypes.func,
+  editInteractionHandler: PropTypes.func,
 };
 
 export default InteractionCard;
