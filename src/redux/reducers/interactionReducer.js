@@ -13,7 +13,7 @@ import {
   INTERACTION_UPDATE_FAIL
 } from "../constants/interactionConstants";
 
-const interactionListInitialState = { interactions: [], loading: true, error: "" };
+export const interactionListInitialState = { interactions: [], loading: true, error: "" };
 
 function interactionListReducer(state = interactionListInitialState, action) {
   switch (action.type) {
