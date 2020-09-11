@@ -12,8 +12,10 @@ function InteractionCard(props) {
 
     if (props.mode != "add" && props.mode != "edit") {
       return (
-        <div className="iconButtons">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div className="iconButtons" data-test="iconButtons">
+          &nbsp;&nbsp;&nbsp;
+
           <img
             alt="Edit"
             src={ACTIONS_IMAGE_PATH + "/edit.png"}
@@ -46,7 +48,14 @@ function InteractionCard(props) {
         <div>
           <p>
 
-            <textarea onChange={handleTextChange}>{props.interaction.comments}</textarea>
+            <textarea
+              className="interactionCardTextarea"
+              data-test="interactionCardTextarea"
+              id="comment"
+              onChange={handleTextChange}
+            >
+              {props.interaction.comments}
+            </textarea>
 
           </p>
           <div>
@@ -82,8 +91,10 @@ function InteractionCard(props) {
   return (
     <>
 
-      <blockquote className="interactionCard">
+
+      <blockquote className="interactionCard" data-test="example-twitter">
         <div><b>{props.interaction.dateTime}</b>{renderIconButtons()}</div>
+
 
         {renderComment()}
       </blockquote>
@@ -91,9 +102,19 @@ function InteractionCard(props) {
   );
 }
 
-// InteractionCard.propTypes = {
-//   // TODO: interaction shape.
-//   deleteInteractionHandler: PropTypes.func,
-// };
+
+InteractionCard.propTypes = {
+  interaction: PropTypes.shape({
+    comment: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    datetime: PropTypes.dateTime,
+  }),
+  mode: PropTypes.string.isRequired,
+  deleteInteractionHandler: PropTypes.func,
+  saveInteractionHandler: PropTypes.func,
+  cancelInteractionHandler: PropTypes.func,
+  editInteractionHandler: PropTypes.func,
+};
+
 
 export default InteractionCard;
