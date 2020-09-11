@@ -50,7 +50,7 @@ function UpdateCustomer(props) {
         onChange={handleInputChange}
         required
       />
-      <button className="button">UpdateCustomer</button>
+      <button className="button">Update Customer</button>
     </form>
   );
 }

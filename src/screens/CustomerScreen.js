@@ -11,7 +11,7 @@ import {
   interactionUpdate,
 } from "../redux/actions/interactionAction";
 
-import { customerGet, customerDelete } from "../redux/actions/customerAction";
+import { customerGet, customerDelete, customerUpdate } from "../redux/actions/customerAction";
 
 import InteractionCard from "../components/interactions/InteractionCard";
 import { AVATAR_IMAGE_PATH } from ".././utils/constants";
@@ -22,6 +22,7 @@ function CustomerScreen(props) {
 
   const [interactionMode, setInteractionMode] = useState("");
   const [interactionEditId, setInteractionEditId] = useState("");
+  const [customerMode, setcustomerMode] = useState("");
 
   const { interactions } = state.interactionList;
   const interactionsLoading = state.interactionList.loading;
@@ -56,7 +57,8 @@ function CustomerScreen(props) {
   };
 
   const updateCustomerHandler = (customerId) => {
-    history.push("/customermaintenancescreen/?customerId=" + customerId);
+    setcustomerMode("edit");
+    // history.push("/customermaintenancescreen/?customerId=" + customerId);
   };
 
   const afterDeleteHandler = () => {
@@ -83,25 +85,43 @@ function CustomerScreen(props) {
         interaction.comments
     );
 
+    const cleanUp = () =>{
+      clearInteractionMode();
+      dispatch(interactionList(customerId));
+    }
+
     if (mode == "add") {
-      dispatch(interactionAdd(interaction)).then(() => {
-        clearInteractionMode();
-        dispatch(interactionList(customerId));
-      });
+      dispatch(interactionAdd(interaction)).then(cleanUp());
     } else if (mode == "edit") {
       interaction.dateTime = "";
-      dispatch(interactionUpdate(interaction)).then(() => {
-        clearInteractionMode();
-        dispatch(interactionList(customerId));
-      });
+      dispatch(interactionUpdate(interaction)).then(cleanUp());
     }
   };
 
   const cancelInteractionHandler = () => {
     console.log(">>> CustomerScreen.cancelInteractionHandler");
-    if (interactionMode == "edit") dispatch(interactionList(customerId));
-
     clearInteractionMode();
+    if (interactionMode == "edit") 
+      dispatch(interactionList(customerId));
+  };
+
+  const saveCustomerHandler = (customer, mode) => {
+    console.log(
+      ">>> CustomerScreen.saveCustomerHandler" 
+    );
+
+    const cleanUp = () =>{
+      setcustomerMode("");
+      dispatch(customerGet(customerId));
+    }
+
+    dispatch(customerUpdate(customer)).then(cleanUp());
+  };
+
+  const cancelCustomerHandler = () => {
+    console.log(">>> CustomerScreen.cancelCustomerHandler");
+    setcustomerMode("");
+    dispatch(customerGet(customerId));
   };
 
   const editInteractionHandler = (id) => {
@@ -115,9 +135,11 @@ function CustomerScreen(props) {
       ">>> CustomerScreen.deleteInteractionHandler interactionId = " +
         interactionId
     );
-    dispatch(interactionDelete(interactionId)).then(
-      dispatch(interactionList(customerId))
-    );
+
+    dispatch(interactionDelete(interactionId))
+      .then(dispatch(interactionList(customerId)));
+    
+
   };
 
   if (loading == true || interactionsLoading == true) {
@@ -143,6 +165,9 @@ function CustomerScreen(props) {
           <CustomerCard
             customer={customer}
             imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+            saveCustomerHandler = {saveCustomerHandler}
+            cancelCustomerHandler = {cancelCustomerHandler}
+            mode = {customerMode}
           ></CustomerCard>
           <div className="padding"></div>
           <button
