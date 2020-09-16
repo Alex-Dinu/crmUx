@@ -9,13 +9,10 @@ function InteractionCard(props) {
   }
 
   const renderIconButtons = () => {
-
     if (props.mode != "add" && props.mode != "edit") {
       return (
-
         <div className="iconButtons" data-test="iconButtons">
           &nbsp;&nbsp;&nbsp;
-
           <img
             alt="Edit"
             src={ACTIONS_IMAGE_PATH + "/edit.png"}
@@ -23,7 +20,6 @@ function InteractionCard(props) {
               props.editInteractionHandler(props.interaction.id);
             }}
           />
-
           &nbsp;
           <img
             alt="Delete"
@@ -34,20 +30,16 @@ function InteractionCard(props) {
           />
         </div>
       );
-    }  
-
-    else
-    {
-      return(<div></div>);
+    } else {
+      return <div></div>;
     }
-  }
+  };
 
   const renderComment = () => {
     if (props.mode == "add" || props.mode == "edit") {
       return (
         <div>
           <p>
-
             <textarea
               className="interactionCardTextarea"
               data-test="interactionCardTextarea"
@@ -56,7 +48,6 @@ function InteractionCard(props) {
             >
               {props.interaction.comments}
             </textarea>
-
           </p>
           <div>
             <button
@@ -90,11 +81,11 @@ function InteractionCard(props) {
   };
   return (
     <>
-
-
       <blockquote className="interactionCard" data-test="example-twitter">
-        <div><b>{props.interaction.dateTime}</b>{renderIconButtons()}</div>
-
+        <div>
+          <b>{props.interaction.dateTime}</b>
+          {renderIconButtons()}
+        </div>
 
         {renderComment()}
       </blockquote>
@@ -102,12 +93,11 @@ function InteractionCard(props) {
   );
 }
 
-
 InteractionCard.propTypes = {
   interaction: PropTypes.shape({
     comment: PropTypes.string,
     id: PropTypes.string.isRequired,
-    datetime: PropTypes.dateTime,
+    datetime: PropTypes.instanceOf(Date),
   }),
   mode: PropTypes.string.isRequired,
   deleteInteractionHandler: PropTypes.func,
@@ -115,6 +105,5 @@ InteractionCard.propTypes = {
   cancelInteractionHandler: PropTypes.func,
   editInteractionHandler: PropTypes.func,
 };
-
 
 export default InteractionCard;
