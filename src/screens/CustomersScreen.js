@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 
-
 import CustomerCard from "../components/customer/CustomerCard";
 import { TextField } from "@material-ui/core";
 import SkeletonCustomers from "./SkeletonCustomers";
@@ -10,11 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { customerList, customerAdd } from "../redux/actions/customerAction";
 import { useSetFocus } from "../utils/customHooks/useSetFocus";
 import { useHistory, Redirect } from "react-router-dom";
-
+import { getCustomers } from "../redux/selectors/customerSelectors";
 
 function CustomersScreen() {
-  const state = useSelector((state) => state);
-  const { customers, loading } = state.customerList;
+  const allCustomers = useSelector(getCustomers);
+  const { customers, loading } = allCustomers;
   const [searchQuery, setSearchQuery] = useState("");
 
   const dispatch = useDispatch();
@@ -26,23 +25,19 @@ function CustomersScreen() {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-
   useEffect(() => {
     dispatch(customerList(searchQuery));
-
 
     return () => {};
   }, [searchQuery]);
 
   const saveCustomerHandler = (customer, mode) => {
-    console.log(
-      ">>> CustomerScreen.saveCustomerHandler" 
-    );
+    console.log(">>> CustomerScreen.saveCustomerHandler");
 
-    const cleanUp = () =>{
+    const cleanUp = () => {
       setcustomerMode("");
       dispatch(customerList(searchQuery));
-    }
+    };
 
     dispatch(customerAdd(customer)).then(cleanUp());
   };
@@ -52,7 +47,6 @@ function CustomersScreen() {
     setcustomerMode("");
     dispatch(customerList(searchQuery));
   };
-
 
   return (
     <>
@@ -64,7 +58,7 @@ function CustomersScreen() {
               autoFocus
               className="customerSearch"
               id="standard-basic"
-              label="Search for Customers" 
+              label="Search for Customers"
               onChange={(e) => setSearchQuery(e.target.value)}
               value={searchQuery}
               ref={searchRef}
@@ -83,20 +77,18 @@ function CustomersScreen() {
           </button>
 
           <ul className="customers">
-          {customerMode == "add" ? (
-
+            {customerMode == "add" ? (
               <li>
-              <CustomerCard
-                customer={{}}
-                imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
-                saveCustomerHandler={saveCustomerHandler}
-                cancelCustomerHandler={cancelCustomerHandler}
-                mode="add"
-            ></CustomerCard>
+                <CustomerCard
+                  customer={{}}
+                  imagePath={AVATAR_IMAGE_PATH + "/" + getRandomInt(6) + ".png"}
+                  saveCustomerHandler={saveCustomerHandler}
+                  cancelCustomerHandler={cancelCustomerHandler}
+                  mode="add"
+                ></CustomerCard>
               </li>
-
             ) : null}
-           
+
             {customers.map((customer) => (
               <li key={customer.id}>
                 <CustomerCard
